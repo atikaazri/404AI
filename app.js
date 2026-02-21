@@ -115,14 +115,13 @@ function buildUI() {
           <div class="page-404">
             <div class="four04-bg" id="home-canvas"></div>
             <div class="four04-content">
-              <img id="home-logo" class="four04-logo" src="desktop/logo.png" alt="404">
-              <div class="four04-title">404</div>
+              <img id="home-logo" class="four04-logo" src="colLogo.svg" alt="Logo" style="max-width:400px;width:80vw;">
               <div class="four04-sub">Page Not Found — But Art Is</div>
               <div class="four04-cta" style="display:flex;gap:12px;justify-content:center">
                 <button class="btn primary" onclick="switchTab('trianglify')">Explore Art →</button>
               </div>
               <p style="margin-top:24px;font-size:10px;color:var(--text-dim);animation:fadeIn 1s .5s both">
-                9 algorithms · real-time controls · export PNG
+                10 algorithms · real-time controls · export PNG
               </p>
             </div>
           </div>
@@ -409,15 +408,21 @@ function homeSketch(p) {
   };
 }
 
-// Add CSS for blinking 404
+// Add CSS for squashing 404
 const style404 = document.createElement('style');
 style404.textContent = `
-  @keyframes blink404 {
-    0%, 49% { opacity: 1; }
-    50%, 100% { opacity: 0.3; }
+  @keyframes squash404 {
+    0%, 100% { 
+      transform: scaleY(1);
+      transform-origin: center;
+    }
+    50% { 
+      transform: scaleY(0.1);
+      transform-origin: center;
+    }
   }
   .four04-title {
-    animation: blink404 2s infinite !important;
+    animation: squash404 2s ease-in-out infinite !important;
   }
 `;
 document.head.appendChild(style404);
@@ -506,7 +511,7 @@ function trianglifySketch(p) {
 // ==========================================
 function flowSketch(p) {
   let particles = [];
-  let params = { count: 2000, speed: 2, scale: 0.005, trail: 0.1, particleSize: 3 };
+  let params = { count: 2000, speed: 2, scale: 0.003, trail: 0.05, particleSize: 1 };
   
   p.setup = function() {
     const container = document.getElementById('flow-canvas');
@@ -1502,8 +1507,8 @@ function mulhollandSketch(p) {
   let S;
   let PAD;
   let params = {
-    transparency: 100,
-    layers: 5,
+    transparency: 200,
+    layers: 12,
     useCustomColors: false,
     customColor1: '#0077B6',
     customColor2: '#00B4D8'
@@ -1857,6 +1862,3 @@ function transparentEarthSketch(p) {
   };
 }
 
-console.log('✓ Algorithmic Art Lab loaded');
-console.log('✓ 10 algorithms with color themes');
-console.log('✓ Theme support: 6 presets + custom');
